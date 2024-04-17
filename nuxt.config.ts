@@ -14,7 +14,8 @@ export default defineNuxtConfig({
     "~/public/scss/components.scss",
   ],
   modules: [
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    'nuxt-svgo',
   ],
   devtools: { enabled: true }
 })
