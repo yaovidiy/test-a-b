@@ -9,6 +9,10 @@ export default defineNuxtConfig({
       link: [{ rel: 'icon', type: 'image/png', href: '/assets/images/logo.png' }]
     }
   },
+  css: [
+    "~/public/scss/main.scss",
+    "~/public/scss/components.scss",
+  ],
   modules: [
     '@nuxtjs/tailwindcss'
   ],

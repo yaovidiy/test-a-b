@@ -1,0 +1,18 @@
+@import url("https://fonts.cdnfonts.com/css/proxima-nova-condensed");
+
+body {
+  font-family: "Proxima Nova Condensed", sans-serif;
+  z-index: 1;
+
+  &::before {
+    z-index: -1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    background-image: url("/assets/images/bg_light.png");
+    opacity: 0.1;
+    width: 100vw;
+    height: 100vh;
+  }
+}
