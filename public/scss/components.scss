@@ -4,3 +4,29 @@
     cursor: not-allowed;
   }
 }
+
+.select-btn {
+  & .chevron {
+    transition: rotate 0.3s;
+
+    &.opened {
+      rotate: 180deg;
+    }
+  }
+}
+
+.select-list {
+  &__option {
+    transition: all 0.3s;
+
+    &:hover {
+      color: #fff;
+      background-color: #00ca14;
+    }
+
+    &--selected { 
+      color: #fff;
+      background-color: #00ca14;
+    }
+  }
+}

@@ -16,3 +16,13 @@ body {
     height: 100vh;
   }
 }
+
+.slide-enter-to, .slide-leave {
+  max-height: 1000px;
+  overflow: hidden;
+}
+
+.slide-enter, .slide-leave-to {
+  overflow: hidden;
+  max-height: 0;
+}

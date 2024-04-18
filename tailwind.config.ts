@@ -11,6 +11,8 @@ export default <Partial<Config>>{
       black: '#000000',
       white: '#ffffff',
       red: '#FF0000',
+      grey: '#D2D5DA',
+      'dark-grey': '#6C727F',
     }
   }
 }
