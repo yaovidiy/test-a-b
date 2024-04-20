@@ -7,8 +7,15 @@
 </template>
 
 <script setup lang="ts">
+interface IEmit {
+  (e: 'timeout'): void;
+}
+
+const emit = defineEmits<IEmit>();
+
 const duration = 1000;
 const currentTime = ref(180000);
+const isTimeout = ref(false);
 const displayTime = computed(() => {
   const totalSeconds = Math.floor(currentTime.value / 1000);
   const totalMinutes = Math.floor(totalSeconds / 60);
@@ -32,6 +39,7 @@ function countDown() {
 
     if (newCurrentTime < 0) {
       clearInterval(interval);
+      isTimeout.value = true;
       return;
     }
 
@@ -50,10 +58,17 @@ onMounted(() => {
       countDown();
     }
 
+    isTimeout.value = true;
     return;
   }
 
   countDown();
+})
+
+watch(isTimeout, (newValue) => {
+  if (newValue) {
+    emit('timeout');
+  }
 })
 </script>
 
