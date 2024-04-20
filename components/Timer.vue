@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-40 h-[60px] rounded-xl bg-black relative overflow-hidden transition-all"
+  <div class="flex w-full max-w-40 h-[60px] rounded-xl bg-black relative overflow-hidden transition-all"
     :class="{ 'flickering': isFlickering }">
     <div class="h-full bg-green rounded-xl transition-all" :style="{ width: `${currentWidth}%` }"></div>
     <span class="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">{{ displayTime }}</span>

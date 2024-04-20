@@ -11,6 +11,7 @@ export default <Partial<Config>>{
       black: '#000000',
       white: '#ffffff',
       red: '#FF0000',
+      'light-grey': '#CDCDCD',
       grey: '#D2D5DA',
       'dark-grey': '#6C727F',
       'grey-firm': '#121826',
@@ -21,7 +22,11 @@ export default <Partial<Config>>{
           lineHeight: '57.6px',
           fontWeight: 800,
         }],
-        'heading-2': ['24px', {
+        'heading-2': ['32px', {
+          lineHeight: '38.4px',
+          fontWeight: 800,
+        }],
+        'heading-3': ['24px', {
           lineHeight: '28.8px',
           fontWeight: 600,
         }],
