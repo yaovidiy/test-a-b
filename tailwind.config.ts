@@ -15,6 +15,7 @@ export default <Partial<Config>>{
       grey: '#D2D5DA',
       'dark-grey': '#6C727F',
       'grey-firm': '#121826',
+      transparent: 'transparent',
     },
     extend: {
       fontSize: {

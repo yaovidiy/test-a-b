@@ -33,7 +33,7 @@
           to rock self-learning</p>
       </div>
 
-      <Button :classes="'mb-8'">
+      <Button :classes="'mb-8'" @click="openModal">
         <template #default>
           <span class="text-body-bold">Get my plan</span>
         </template>
@@ -74,6 +74,7 @@
         Terms .
       </p>
     </div>
+    <Modal :is-open="isModalOpen" @close="closeModal" />
   </main>
   {{ route.query.abtest }}
 </template>
@@ -86,15 +87,30 @@ type OptionItem = { value: string, [key: string]: any, isSelected: boolean }
 
 const route = useRoute();
 const showTimer = ref(true);
-const options = reactive([
-  { value: '1', isSelected: false },
-  { value: '2', isSelected: false },
-  { value: '3', isSelected: false },
-  { value: '4', isSelected: false },
-  { value: '5', isSelected: false },
-  { value: '6', isSelected: false },
-  { value: '7', isSelected: false },
+const isModalOpen = ref(false);
+const years = reactive([
+  { value: '2030', isSelected: false },
+  { value: '2029', isSelected: false },
+  { value: '2028', isSelected: false },
+  { value: '2027', isSelected: false },
+  { value: '2026', isSelected: false },
+  { value: '2025', isSelected: false },
+  { value: '2024', isSelected: false },
 ])
+const months = reactive([
+  { value: 'January', isSelected: false },
+  { value: 'February', isSelected: false },
+  { value: 'March', isSelected: false },
+  { value: 'April', isSelected: false },
+  { value: 'May', isSelected: false },
+  { value: 'June', isSelected: false },
+  { value: 'July', isSelected: false },
+  { value: 'August', isSelected: false },
+  { value: 'September', isSelected: false },
+  { value: 'October', isSelected: false },
+  { value: 'November', isSelected: false },
+  { value: 'December', isSelected: false },
+]);
 const STAR_OPTIONS = [
   'Exclusive access to <b class="text-primary text-body-bold">350+</b> learning programs',
   'Personalized course plan',
@@ -105,23 +121,26 @@ const STAR_OPTIONS = [
 useHead({
   title: 'PlanetLearn'
 });
-function alertMessage(message: string) {
-  alert(message);
-}
 function toggleTimer() {
   showTimer.value = !showTimer.value;
 }
-function handleSelect(option: OptionItem) {
-  options.forEach((_, index, array) => {
-    array[index].isSelected = false;
-  });
-
-  const optionIndex = options.findIndex(opt => opt.value === option.value);
-
-  if (optionIndex !== -1) {
-    options[optionIndex].isSelected = !options[optionIndex].isSelected;
-  }
+function openModal() {
+  isModalOpen.value = true;
 }
+function closeModal() {
+  isModalOpen.value = false;
+}
+// function handleSelect(option: OptionItem) {
+//   options.forEach((_, index, array) => {
+//     array[index].isSelected = false;
+//   });
+
+//   const optionIndex = options.findIndex(opt => opt.value === option.value);
+
+//   if (optionIndex !== -1) {
+//     options[optionIndex].isSelected = !options[optionIndex].isSelected;
+//   }
+// }
 </script>
 
 <style lang="scss" scoped>

@@ -3,6 +3,14 @@
     background-color: #d2d2d2;
     cursor: not-allowed;
   }
+
+  &.google-pay {
+    color: #000;
+    &:hover {
+      color: #fff;
+      background-color: #000;
+    }
+  }
 }
 
 .select-btn {
