@@ -8,6 +8,12 @@
 
     <Timer></Timer>
     <Select :options="options" @selected="handleSelect"></Select>
+    <Fieldset>
+      <template #legend>Year</template>
+      <template #default>
+        <Select :options="options" @selected="handleSelect"></Select>
+      </template>
+    </Fieldset>
   </div>
 
   {{ route.query.abtest }}

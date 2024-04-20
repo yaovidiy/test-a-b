@@ -13,6 +13,35 @@ export default <Partial<Config>>{
       red: '#FF0000',
       grey: '#D2D5DA',
       'dark-grey': '#6C727F',
+      'grey-firm': '#121826',
+    },
+    extend: {
+      fontSize: {
+        'heading-1': ['48px', {
+          lineHeight: '57.6px',
+          fontWeight: 800,
+        }],
+        'heading-2': ['24px', {
+          lineHeight: '28.8px',
+          fontWeight: 600,
+        }],
+        'caption-bold': ['12px', {
+          lineHeight: '14.62px',
+          fontWeight: 700,
+        }],
+        'body-bold': ['16px', {
+          lineHeight: '19.2px',
+          fontWeight: 700
+        }],
+        caption: ['12px', {
+          lineHeight: '14.62px',
+          fontWeight: 400,
+        }],
+        body: ['16px', {
+          lineHeight: '19.2px',
+          fontWeight: 400,
+        }]
+      }
     }
   }
 }
