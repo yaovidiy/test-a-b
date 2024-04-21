@@ -1,4 +1,19 @@
 .btn {
+  &.dark {
+    background-color: #fff;
+    color: #4eaaff;
+
+    &:hover {
+      background-color: #4eaaff;
+      color: #fff;
+    }
+
+    &:disabled {
+      background-color: #617398;
+      color: #ffffff66;
+    }
+  }
+
   &:disabled {
     background-color: #d2d2d2;
     cursor: not-allowed;
@@ -24,6 +39,20 @@
 }
 
 .select-list {
+  &.dark &__option {
+    background-color: #617398;
+    border-color: #ffffff4d;
+    color: #fff;
+
+    &:hover {
+      background-color: #6c89ff;
+    }
+
+    &--selected {
+      background-color: #6c89ff;
+    }
+  }
+
   &__option {
     transition: all 0.3s ease;
 
@@ -32,7 +61,7 @@
       background-color: #00ca14;
     }
 
-    &--selected { 
+    &--selected {
       color: #fff;
       background-color: #00ca14;
     }

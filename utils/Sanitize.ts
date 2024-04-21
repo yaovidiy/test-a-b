@@ -4,10 +4,12 @@ import type { IOptions } from 'sanitize-html';
 export const sanitize = (dirty: string) => {
   const defaultOptions: IOptions = {
     allowedTags: [
-      'b'
+      'b',
+      'span'
     ],
     allowedAttributes: {
       'b': ['class'],
+      'span': ['class'],
     },
     disallowedTagsMode: 'discard',
     enforceHtmlBoundary: false,

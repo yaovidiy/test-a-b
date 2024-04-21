@@ -1,17 +1,19 @@
 <template>
   <div class="relative">
-    <Button :classes="'flex justify-between items-center gap-5 bg-white hover:bg-white rounded-none select-btn'"
+    <Button :classes="`flex justify-between items-center !px-2 gap-5 ${buttonClasses} rounded-none select-btn`"
       @click="toggleSelect">
       <template #default>
         <slot>
-          <span class="text-dark-grey">{{ selectedOption?.value ?? 'Select' }}</span>
+          <span :class="buttonText">{{ selectedOption?.value ?? 'Select' }}</span>
         </slot>
 
-        <ChevronDown class="transition-all chevron text-dark-grey" :class="{ opened: isOpened }" />
+        <ChevronDown :class="buttonChevron" />
       </template>
     </Button>
     <Transition name="slide">
-      <ul v-if="isOpened" class="flex flex-col rounded-lg border border-grey overflow-hidden select-list absolute top-full z-10">
+      <ul v-if="isOpened"
+        class="flex flex-col rounded-lg border border-grey max-h-40 overflow-y-scroll select-list absolute top-full z-30"
+        :class="{ dark: mode === 'dark' }">
         <li v-for="option in options" :key="option.value"
           class="bg-white cursor-pointer pl-4 pr-2 border-b last:border-b-0 border-grey pt-2 pb-2 select-list__option"
           :class="{ 'select-list__option--selected': option.isSelected }" @click="selectItem(option)">
@@ -34,6 +36,7 @@ type OptionItem = { value: string, [key: string]: any, isSelected: boolean }
 
 interface IProps {
   options: OptionItem[];
+  mode?: 'light' | 'dark';
 }
 interface IEmit {
   (e: 'selected', args: OptionItem): void;
@@ -51,6 +54,31 @@ const selectedOption = computed<OptionItem | null>(() => {
   }
 
   return selectedOption;
+});
+
+const buttonClasses = computed(() => {
+  if (props.mode === 'light') {
+    return 'bg-white hover:bg-white';
+  }
+
+  return 'bg-[#617398] hover:bg-[#617398]';
+});
+
+const buttonChevron = computed(() => {
+  return {
+    ['transition-all']: true,
+    ['chevron']: true,
+    ['text-dark-grey']: props.mode === 'light',
+    ['text-white']: props.mode === 'dark',
+    ['opened']: isOpened.value
+  }
+});
+
+const buttonText = computed(() => {
+  return {
+    ['text-white']: props.mode === 'dark',
+    ['text-dark-grey']: props.mode === 'light',
+  }
 });
 
 function toggleSelect() {
