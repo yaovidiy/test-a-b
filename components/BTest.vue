@@ -1,4 +1,5 @@
 <template>
+  {{ showTimer }}
   <header class="flex md:px-[135px] mb-6 items-center gap-2 px-5 py-2 text-blue">
     <Logo class="logo" :filled="true" />
     <span class="text-heading-2">
@@ -7,8 +8,7 @@
     </span>
   </header>
   <main class="mx-auto px-5 py-6 md:px-0 md:max-w-[80%] lg:max-w-[65%] md:flex md:gap-6">
-    <div
-      v-if="showMobileTimer"
+    <div v-if="showMobileTimer"
       class="flex justify-center items-center gap-2 bg-[#00000099] md:hidden py-3 px-4 rounded-xl border mb-6 w-full ">
       <div class="flex flex-col gap-2 flex-1" :class="{ 'text-center': !showTimer }">
         <h3 class="text-lg font-extrabold text-light-blue">
@@ -23,7 +23,8 @@
           Then $39.99/week
         </div>
       </div>
-      <Timer :mode="'dark'" v-if="showTimer" class="flex-1" @timeout="toggleTimer" />
+      <Timer v-if="showTimer" :display-time="displayTime" :is-flickering="isFlickering" :current-width="currentWidth"
+        class="flex-1" />
     </div>
 
     <div class="md:w-1/2 hidden md:block">
@@ -63,7 +64,8 @@
             Then $39.99/week
           </p>
         </div>
-        <Timer :mode="'dark'" v-if="showTimer" class="flex-1" @timeout="toggleTimer" />
+        <Timer v-if="showTimer" :display-time="displayTime" :is-flickering="isFlickering" :current-width="currentWidth"
+          :mode="'dark'" class="flex-1" />
       </div>
 
       <div class="md:w-1/2 md:hidden">
@@ -180,9 +182,7 @@ import MasterCard from '~/public/assets/svg/mastercard.svg';
 import Rocket from '~/public/assets/svg/rocket.svg';
 import Ball from '~/public/assets/svg/Ball.svg';
 
-type OptionItem = { value: string, [key: string]: any, isSelected: boolean }
 
-const showTimer = ref(true);
 const cardNumber = ref('');
 const CVV = ref('');
 const STAR_OPTIONS = [
@@ -194,6 +194,14 @@ const STAR_OPTIONS = [
 ];
 
 const {
+  showTimer,
+  displayTime,
+  isFlickering,
+  currentWidth,
+} = useTimer();
+
+
+const {
   isModalOpen,
   years,
   months,
@@ -202,7 +210,7 @@ const {
   openModal,
   closeModal,
   handleMonthSelect,
-  handleYearSelect
+  handleYearSelect,
 } = useMainLogic(cardNumber, CVV);
 
 useHead({
@@ -225,9 +233,7 @@ useHead({
   },
 });
 
-function toggleTimer() {
-  showTimer.value = !showTimer.value;
-}
+
 </script>
 
 <style lang="scss" scoped>

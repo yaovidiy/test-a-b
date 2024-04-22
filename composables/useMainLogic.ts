@@ -94,6 +94,6 @@ export default function useMainLogic(cardNumber: Ref<string>, CVV: Ref<string>) 
     openModal,
     closeModal,
     handleMonthSelect,
-    handleYearSelect
+    handleYearSelect,
   }
 }

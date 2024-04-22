@@ -22,7 +22,8 @@
           Then $39.99/week
         </div>
       </div>
-      <Timer v-if="showTimer" class="flex-1" @timeout="toggleTimer" />
+      <Timer v-if="showTimer" :display-time="displayTime" :is-flickering="isFlickering" :current-width="currentWidth"
+        class="flex-1" />
     </div>
 
     <div class="md:w-1/2">
@@ -57,7 +58,8 @@
             Then $39.99/week
           </p>
         </div>
-        <Timer v-if="showTimer" class="flex-1" @timeout="toggleTimer" />
+        <Timer v-if="showTimer" :display-time="displayTime" :is-flickering="isFlickering" :current-width="currentWidth"
+          class="flex-1" />
       </div>
 
       <StaredList :options="STAR_OPTIONS" class="mb-8"></StaredList>
@@ -156,9 +158,15 @@ import GooglePay from '~/public/assets/svg/googlepay.svg';
 import MasterCard from '~/public/assets/svg/mastercard.svg';
 
 
-const showTimer = ref(true);
 const cardNumber = ref('');
 const CVV = ref('');
+
+const {
+  showTimer,
+  displayTime,
+  isFlickering,
+  currentWidth,
+} = useTimer();
 
 const {
   isModalOpen,
@@ -185,10 +193,6 @@ useHead({
     class: 'light',
   },
 });
-
-function toggleTimer() {
-  showTimer.value = !showTimer.value;
-}
 </script>
 
 <style lang="scss" scoped>
