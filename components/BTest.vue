@@ -68,7 +68,8 @@
       <div class="md:w-1/2 md:hidden">
         <div class="flex flex-col mb-8 gap-4">
           <h1 class="text-heading-2 text-white uppercase"><span class="text-blue">Start</span> your learning journey
-            <span class="text-blue">now</span></h1>
+            <span class="text-blue">now</span>
+          </h1>
           <p class="text-heading-2 text-white">Get a <span class="font-bold"><span
                 class="text-blue">Smart</span>Study</span>
             plan
@@ -181,51 +182,6 @@ import Ball from '~/public/assets/svg/Ball.svg';
 type OptionItem = { value: string, [key: string]: any, isSelected: boolean }
 
 const showTimer = ref(true);
-const isModalOpen = ref(false);
-const years = reactive([
-  { value: '2030', isSelected: false },
-  { value: '2029', isSelected: false },
-  { value: '2028', isSelected: false },
-  { value: '2027', isSelected: false },
-  { value: '2026', isSelected: false },
-  { value: '2025', isSelected: false },
-  { value: '2024', isSelected: false },
-])
-const months = reactive([
-  { value: 'January', isSelected: false },
-  { value: 'February', isSelected: false },
-  { value: 'March', isSelected: false },
-  { value: 'April', isSelected: false },
-  { value: 'May', isSelected: false },
-  { value: 'June', isSelected: false },
-  { value: 'July', isSelected: false },
-  { value: 'August', isSelected: false },
-  { value: 'September', isSelected: false },
-  { value: 'October', isSelected: false },
-  { value: 'November', isSelected: false },
-  { value: 'December', isSelected: false },
-]);
-const selectedMonth = computed(() => {
-  return months.find(month => month.isSelected);
-})
-const selectedYear = computed(() => {
-  return years.find(year => year.isSelected);
-})
-const isDisabledSubmit = computed(() => {
-  if (!selectedMonth.value || !selectedYear.value || !cardNumber.value || !CVV.value) {
-    return true;
-  }
-
-  if (cardNumber.value.length !== 20) {
-    return true;
-  }
-
-  if (CVV.value.length !== 3) {
-    return true;
-  }
-
-  return false;
-});
 const cardNumber = ref('');
 const CVV = ref('');
 const STAR_OPTIONS = [
@@ -234,7 +190,19 @@ const STAR_OPTIONS = [
   'Comfy learning schedule made by you',
   '<span class="text-blue"><b class="text-body-bold">24/7</b> tutor support in a secure chat</span>',
   'Lifetime access to materials',
-]
+];
+
+const {
+  isModalOpen,
+  years,
+  months,
+  isDisabledSubmit,
+  openModal,
+  closeModal,
+  handleMonthSelect,
+  handleYearSelect
+} = useMainLogic(cardNumber, CVV);
+
 useHead({
   title: 'SmartStudy',
   link: [
@@ -242,6 +210,12 @@ useHead({
       rel: 'icon',
       type: 'image/png',
       href: '/assets/images/logo_dark.png'
+    },
+  ],
+  meta: [
+    {
+      name: 'description',
+      content: 'Get a SmartStudy plan to rock self-learning'
     }
   ],
   bodyAttrs: {
@@ -251,35 +225,6 @@ useHead({
 
 function toggleTimer() {
   showTimer.value = !showTimer.value;
-}
-function openModal() {
-  isModalOpen.value = true;
-}
-function closeModal() {
-  isModalOpen.value = false;
-}
-function handleYearSelect(option: OptionItem) {
-  years.forEach((_, index, array) => {
-    array[index].isSelected = false;
-  });
-
-  const optionIndex = years.findIndex(opt => opt.value === option.value);
-
-  if (optionIndex !== -1) {
-    years[optionIndex].isSelected = !years[optionIndex].isSelected;
-  }
-}
-
-function handleMonthSelect(option: OptionItem) {
-  months.forEach((_, index, array) => {
-    array[index].isSelected = false;
-  });
-
-  const optionIndex = months.findIndex(opt => opt.value === option.value);
-
-  if (optionIndex !== -1) {
-    months[optionIndex].isSelected = !months[optionIndex].isSelected;
-  }
 }
 </script>
 

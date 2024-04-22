@@ -1,25 +1,41 @@
 <template>
-  <component :is="isDefaultComponent ? ATest : BTest"></component>
+  <template v-if="isDefaultComponent !== null">
+    <component :is="isDefaultComponent ? ATest : BTest"></component>
+  </template>
 </template>
 
 <script setup lang="ts">
 import { ATest, BTest } from '#components';
 const route = useRoute();
+const isDefaultComponent = ref<boolean | null>(null);
 
-const isDefaultComponent = computed(() => {
+onMounted(() => {
   if (!route.query.abtest) {
-    return true;
+    isDefaultComponent.value = true;
+    return;
   }
 
   if (route.query.abtest === 'var1') {
-    return true;
+    isDefaultComponent.value = true;
+    return;
   }
 
   if (route.query.abtest === 'var2') {
-    return false;
+    isDefaultComponent.value = false;
+    return;
   }
 
-  return Math.random() === 1;
+  const savedDesignOption = LSget('designOption');
+
+  if (savedDesignOption !== null) {
+    isDefaultComponent.value = savedDesignOption;
+    return;
+  }
+
+  const randomResult = Math.round(Math.random()) > 0;
+  LSsset('designOption', randomResult);
+
+  isDefaultComponent.value = randomResult;
 });
 </script>
 <style lang="scss"></style>

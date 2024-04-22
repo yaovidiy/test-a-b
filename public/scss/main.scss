@@ -6,7 +6,7 @@ body {
   min-height: 100vh;
   min-width: 100vw;
 
-  &::before {
+  &.light::before {
     z-index: -1;
     position: absolute;
     left: 0;

@@ -41,7 +41,8 @@
     </div>
 
     <div class="md:w-1/2 md:rounded-xl md:border md:border-light-grey md:relative md:bg-white md:px-6 md:py-9">
-      <Asteroid :filled="true" :fontControlled="false" class="w-[202px] h-20 absolute -top-[50px] right-6 hidden md:block" />
+      <Asteroid :filled="true" :fontControlled="false"
+        class="w-[202px] h-20 absolute -top-[50px] right-6 hidden md:block" />
       <div class="hidden items-center gap-3 md:flex py-3 px-4 mb-6 w-full ">
         <div class="flex flex-col gap-2 flex-1">
           <h3 class="text-lg md:text-heading-3 font-extrabold">
@@ -144,7 +145,6 @@
       </template>
     </Modal>
   </main>
-  {{ route.query.abtest }}
 </template>
 
 <script setup lang="ts">
@@ -155,57 +155,22 @@ import PayPal from '~/public/assets/svg/paypal.svg';
 import GooglePay from '~/public/assets/svg/googlepay.svg';
 import MasterCard from '~/public/assets/svg/mastercard.svg';
 
-type OptionItem = { value: string, [key: string]: any, isSelected: boolean }
 
-const route = useRoute();
 const showTimer = ref(true);
-const isModalOpen = ref(false);
-const years = reactive([
-  { value: '2030', isSelected: false },
-  { value: '2029', isSelected: false },
-  { value: '2028', isSelected: false },
-  { value: '2027', isSelected: false },
-  { value: '2026', isSelected: false },
-  { value: '2025', isSelected: false },
-  { value: '2024', isSelected: false },
-])
-const months = reactive([
-  { value: 'January', isSelected: false },
-  { value: 'February', isSelected: false },
-  { value: 'March', isSelected: false },
-  { value: 'April', isSelected: false },
-  { value: 'May', isSelected: false },
-  { value: 'June', isSelected: false },
-  { value: 'July', isSelected: false },
-  { value: 'August', isSelected: false },
-  { value: 'September', isSelected: false },
-  { value: 'October', isSelected: false },
-  { value: 'November', isSelected: false },
-  { value: 'December', isSelected: false },
-]);
-const selectedMonth = computed(() => {
-  return months.find(month => month.isSelected);
-})
-const selectedYear = computed(() => {
-  return years.find(year => year.isSelected);
-})
-const isDisabledSubmit = computed(() => {
-  if (!selectedMonth.value || !selectedYear.value || !cardNumber.value || !CVV.value) {
-    return true;
-  }
-
-  if (cardNumber.value.length !== 20) {
-    return true;
-  }
-
-  if (CVV.value.length !== 3) {
-    return true;
-  }
-
-  return false;
-});
 const cardNumber = ref('');
 const CVV = ref('');
+
+const {
+  isModalOpen,
+  years,
+  months,
+  isDisabledSubmit,
+  openModal,
+  closeModal,
+  handleMonthSelect,
+  handleYearSelect
+} = useMainLogic(cardNumber, CVV);
+
 const STAR_OPTIONS = [
   'Exclusive access to <b class="text-primary text-body-bold">350+</b> learning programs',
   'Personalized course plan',
@@ -213,40 +178,16 @@ const STAR_OPTIONS = [
   '<b class="text-primary text-body-bold">24/7</b> tutor support in a secure chat',
   'Lifetime access to materials',
 ]
+
 useHead({
-  title: 'PlanetLearn'
+  title: 'PlanetLearn',
+  bodyAttrs: {
+    class: 'light',
+  },
 });
+
 function toggleTimer() {
   showTimer.value = !showTimer.value;
-}
-function openModal() {
-  isModalOpen.value = true;
-}
-function closeModal() {
-  isModalOpen.value = false;
-}
-function handleYearSelect(option: OptionItem) {
-  years.forEach((_, index, array) => {
-    array[index].isSelected = false;
-  });
-
-  const optionIndex = years.findIndex(opt => opt.value === option.value);
-
-  if (optionIndex !== -1) {
-    years[optionIndex].isSelected = !years[optionIndex].isSelected;
-  }
-}
-
-function handleMonthSelect(option: OptionItem) {
-  months.forEach((_, index, array) => {
-    array[index].isSelected = false;
-  });
-
-  const optionIndex = months.findIndex(opt => opt.value === option.value);
-
-  if (optionIndex !== -1) {
-    months[optionIndex].isSelected = !months[optionIndex].isSelected;
-  }
 }
 </script>
 
