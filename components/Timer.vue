@@ -1,7 +1,7 @@
 <template>
   <div class="flex w-full max-w-40 h-[60px] rounded-xl bg-black relative overflow-hidden transition-all"
     :class="{ 'flickering': isFlickering }">
-    <div class="h-full bg-green rounded-xl transition-all" :style="{ width: `${currentWidth}%` }"></div>
+    <div :class="`h-full ${mode === 'dark' ? 'bg-blue' : 'bg-green'} rounded-xl transition-all`" :style="{ width: `${currentWidth}%` }"></div>
     <span class="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">{{ displayTime }}</span>
   </div>
 </template>
@@ -11,7 +11,12 @@ interface IEmit {
   (e: 'timeout'): void;
 }
 
+interface IProps {
+  mode?: 'dark' | 'light';
+}
+
 const emit = defineEmits<IEmit>();
+defineProps<IProps>();
 
 const duration = 1000;
 const currentTime = ref(180000);

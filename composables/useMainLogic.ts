@@ -25,6 +25,7 @@ export default function useMainLogic(cardNumber: Ref<string>, CVV: Ref<string>) 
     { value: 'November', isSelected: false },
     { value: 'December', isSelected: false },
   ]);
+
   const selectedMonth = computed(() => {
     return months.find(month => month.isSelected);
   })
@@ -45,6 +46,9 @@ export default function useMainLogic(cardNumber: Ref<string>, CVV: Ref<string>) 
     }
 
     return false;
+  });
+  const showMobileTimer = computed(() => {
+    return window.innerWidth < 768;
   });
 
   function openModal() {
@@ -86,6 +90,7 @@ export default function useMainLogic(cardNumber: Ref<string>, CVV: Ref<string>) 
     selectedMonth,
     selectedYear,
     isDisabledSubmit,
+    showMobileTimer,
     openModal,
     closeModal,
     handleMonthSelect,

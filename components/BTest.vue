@@ -8,6 +8,7 @@
   </header>
   <main class="mx-auto px-5 py-6 md:px-0 md:max-w-[80%] lg:max-w-[65%] md:flex md:gap-6">
     <div
+      v-if="showMobileTimer"
       class="flex justify-center items-center gap-2 bg-[#00000099] md:hidden py-3 px-4 rounded-xl border mb-6 w-full ">
       <div class="flex flex-col gap-2 flex-1" :class="{ 'text-center': !showTimer }">
         <h3 class="text-lg font-extrabold text-light-blue">
@@ -22,7 +23,7 @@
           Then $39.99/week
         </div>
       </div>
-      <Timer v-if="showTimer" class="flex-1" @timeout="toggleTimer" />
+      <Timer :mode="'dark'" v-if="showTimer" class="flex-1" @timeout="toggleTimer" />
     </div>
 
     <div class="md:w-1/2 hidden md:block">
@@ -48,21 +49,21 @@
         :fontControlled="false" />
       <Ball class="hidden md:block absolute -top-[43px] -left-[60px] -z-10 w-[86px] h-[86px]" :filled="true"
         :fontControlled="false" />
-      <div class="hidden items-center gap-3 md:flex py-3 px-4 mb-6 w-full ">
+      <div v-if="!showMobileTimer" class="hidden items-center gap-3 md:flex py-3 px-4 mb-6 w-full ">
         <div class="flex flex-col gap-2 flex-1">
           <h3 class="text-lg md:text-heading-3 font-extrabold text-blue">
             3-day trial for $0.99
           </h3>
           <div v-if="showTimer">
             <p class="text-body md:text-xl text-white">Then $9.99</p>
-            <span class="text-black relative after:left-0 opacity-40 line-through">$39.99/week
+            <span class="text-white relative after:left-0 opacity-40 line-through">$39.99/week
             </span>
           </div>
           <p v-else class="text-body text-white">
             Then $39.99/week
           </p>
         </div>
-        <Timer v-if="showTimer" class="flex-1" @timeout="toggleTimer" />
+        <Timer :mode="'dark'" v-if="showTimer" class="flex-1" @timeout="toggleTimer" />
       </div>
 
       <div class="md:w-1/2 md:hidden">
@@ -197,6 +198,7 @@ const {
   years,
   months,
   isDisabledSubmit,
+  showMobileTimer,
   openModal,
   closeModal,
   handleMonthSelect,
