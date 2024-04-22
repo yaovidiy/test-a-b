@@ -1,5 +1,4 @@
 <template>
-  {{ showTimer }}
   <header class="flex md:px-[135px] mb-6 items-center gap-2 px-5 py-2 text-blue">
     <Logo class="logo" :filled="true" />
     <span class="text-heading-2">
