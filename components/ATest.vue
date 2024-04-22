@@ -74,7 +74,7 @@
         Terms .
       </p>
     </div>
-    <Modal :is-open="isModalOpen" @close="closeModal">
+    <Modal :mode="'light'" :is-open="isModalOpen" @close="closeModal">
       <template #body>
         <div>
           <Button :classes="'bg-paypal hover:bg-paypal-hover mb-4 max-w-none'">
@@ -110,13 +110,13 @@
             <Fieldset class="w-1/3">
               <template #legend>Month</template>
               <template #default>
-                <Select :options="months" @selected="handleMonthSelect"></Select>
+                <Select :mode="'light'" :options="months" @selected="handleMonthSelect"></Select>
               </template>
             </Fieldset>
             <Fieldset class="w-1/3">
               <template #legend?>Year</template>
               <template #default>
-                <Select :options="years" @selected="handleYearSelect"></Select>
+                <Select :mode="'light'" :options="years" @selected="handleYearSelect"></Select>
               </template>
             </Fieldset>
             <Fieldset class="w-1/3">
@@ -136,7 +136,7 @@
             <span class="text-body-bold">Submit</span>
           </template>
         </Button>
-        <Button :classes="'bg-none bg-transparent hover:bg-transparent'" @click="$emit('close')">
+        <Button :classes="'bg-none bg-transparent hover:bg-transparent'" @click="closeModal">
           <template #default>
             <span class="text-black text-body-bold opacity-40">Close</span>
           </template>
