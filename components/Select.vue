@@ -61,7 +61,7 @@ const buttonClasses = computed(() => {
     return 'bg-white hover:bg-white';
   }
 
-  return 'bg-[#617398] hover:bg-[#617398]';
+  return '!bg-[#617398] !hover:bg-[#617398]';
 });
 
 const buttonChevron = computed(() => {
